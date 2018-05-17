@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原生js实现星级评分</title>
+	<style>
+		.star-box,.data-box,.d-box  {
+			margin: 15px auto;
+			padding: 15px;
+			box-sizing: border-box;
+			border: yellowgreen 1px dashed;
+		}
+		.star-main {
+			height: 34px;
+			line-height: 34px;
+		}
+		.simg {
+			vertical-align: text-top;
+		}
+		.d-box {
+			border: skyblue 1px dotted;
+		}
+	</style>
+</head>
+<body>
+	<div class="star-box">
+		<p class="star-main">
+			<img class="js-sImg simg" data-score="1" src="./images/star1.png" />
+		    <img class="js-sImg simg" data-score="2" src="./images/star1.png" />
+		    <img class="js-sImg simg" data-score="3" src="./images/star1.png" />
+		    <img class="js-sImg simg" data-score="4" src="./images/star1.png" />
+		    <img class="js-sImg simg" data-score="5" src="./images/star1.png" />
+		    &nbsp;<span class="js-txt"></span>
+		</p>
+	</div>
+	<script>
+		var sImg = document.querySelectorAll(".js-sImg");
+		var txt = document.querySelector(".js-txt");
+		var arrTxt = ["很差","较差","还行","推荐","力荐"];
+
+		for(var i=0; i<sImg.length; i++) {
+			sImg[i].addEventListener("click", function(){
+				var that = this;
+				var score = that.dataset.score;
+				txt.textContent = arrTxt[score-1];
+
+				sImg.forEach(function(el, i){
+					var n = score;
+					if(i < n) {
+						el.setAttribute("src","./images/star2.png");//star2是实心的星星
+					}else{
+						el.setAttribute("src","./images/star1.png");//star1是空心的星星
+					};
+				});
+
+			});
+		};
+	</script>
+</body>
+</html>
